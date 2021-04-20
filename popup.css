@@ -1,0 +1,9 @@
+body {
+    width: 300px;
+}
+
+.info {
+    font-size: x-small;
+    font-style: italic;
+    margin-top: 0;
+}

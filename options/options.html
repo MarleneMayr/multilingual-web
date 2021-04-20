@@ -1,0 +1,51 @@
+<html lang="en">
+
+<head>
+    <title>Multilingual Web</title>
+    <link rel="stylesheet" href="options.css">
+    <link rel="stylesheet" href="../main.css">
+</head>
+
+<body>
+    <div class="card">
+        <h1>
+            <img id="logo" alt="MW Logo" src="../icon_40.png" />
+            <span id="extensionName">Multilingual Web</span>
+        </h1>
+        <p id="status"></p>
+
+        <h2>Azure Translator Activation</h2>
+        <label for="key">
+            Key:
+            <input type="text" id="key" name="key" placeholder="enter your key here"><br>
+        </label>
+        <button id="activate">Activate</button><br>
+
+        <h2>Options</h2>
+
+        <label for="selectorAll">
+            <input type="checkbox" id="selectorAll" value="All" checked>
+            Toggle all elements
+        </label>
+        <hr>
+
+        <label for="selectorH">
+            <input type="checkbox" id="selectorH" name="selector" value="Headings" checked>
+            Headings
+        </label>
+        <label for="selectorP">
+            <input type="checkbox" id="selectorP" name="selector" value="Paragraphs" checked>
+            Paragraphs
+        </label>
+        <label for="selectorOthers">
+            <input type="checkbox" id="selectorOthers" name="selector" value="Others" checked>
+            Others (labels, ...)
+        </label>
+
+        <button id="save">Save</button>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+
+</html>

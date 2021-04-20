@@ -1,0 +1,28 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Multilingual Web</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <h2>Multilingual Web</h2>
+
+  <label for="target">Target language:</label>
+  <input type="text" id="target" name="target" placeholder="en" value="en"><br>
+  <p class="info">en, de, es, fi, and other <a
+      href="https://docs.microsoft.com/en-us/azure/cognitive-services/translator/language-support"
+      target="_blank">supported language
+      codes</a></p>
+
+  <button id="translate">Translate Page</button><br>
+  <button id="individual-on">Individual</button>
+  <button id="individual-off" class="secondaryButton">Deactivate Individual</button>
+  <p class="info">Select individual elements to translate.</p>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+body {
+    --font: 'Public Sans', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    --title-font: 'GT Walsheim Pro', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+}
+
+button {
+    background-color: #059862;
+    border: none;
+    color: white;
+    margin-top: 15px;
+    padding: 10px 32px;
+    text-align: center;
+    font-size: 14px;
+    border: none transparent;
+    border-radius: 8px;
+}
+
+.secondaryButton {
+    background-color: #058a59;
+    border: none;
+    color: white;
+    margin-top: 15px;
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 14px;
+    font-style: italic;
+    border: none transparent;
+    border-radius: 8px;
+}
