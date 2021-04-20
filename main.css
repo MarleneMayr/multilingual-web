@@ -27,3 +27,29 @@ button {
     border: none transparent;
     border-radius: 8px;
 }
+
+a:link {
+    color: #059862;
+}
+
+a:visited {
+    color: #026d46;
+}
+
+a:hover {
+    color: black;
+}
+
+a:active {
+    color: #026d46;
+}
+
+#bottom {
+    position: relative;
+    text-align: center;
+}
+
+#bottom {
+    position: absolute;
+    bottom: 0;
+}
