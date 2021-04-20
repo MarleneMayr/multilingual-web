@@ -1,4 +1,11 @@
-document.getElementById('translate').addEventListener('click', translatePage);
+window.onload = init;
+function init() {
+	document.getElementById('translate').addEventListener('click', translatePage);
+	document.getElementById('individual-on').addEventListener('click', individualOn);
+	document.getElementById('individual-off').addEventListener('click', individualOff);
+	document.getElementById("options").addEventListener('click', openOptions);
+}
+
 function translatePage() {
 	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 		chrome.tabs.sendMessage(
@@ -14,7 +21,6 @@ function translatePage() {
 	});
 }
 
-document.getElementById('individual-on').addEventListener('click', individualOn);
 function individualOn() {
 	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 		chrome.tabs.sendMessage(
@@ -26,7 +32,6 @@ function individualOn() {
 	});
 }
 
-const indOff = document.getElementById('individual-off').addEventListener('click', individualOff)
 function individualOff() {
 	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 		chrome.tabs.sendMessage(
@@ -34,10 +39,14 @@ function individualOff() {
 			{
 				task: 'deactivate individual',
 			},
-			function (response) {
+			function () {
 				window.close();
 			});
 	});
+}
+
+function openOptions() {
+	chrome.runtime.openOptionsPage();
 }
 
 // onclick on the icon, i.e. on opening the popup, initialize page script
