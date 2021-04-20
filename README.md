@@ -3,7 +3,7 @@ Welcome to this little project of mine. Modern browsers are enhancing their auto
 
 > Use AI-based translators on webpages conveniently, but don't miss out on your multilingual skills!
 
-
+![demo](doc.gif)
 
 ## APIs used
 
