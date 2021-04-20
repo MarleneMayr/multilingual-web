@@ -1,31 +1,31 @@
-var translatedMark = "mw-translated";
-var highlightMark = "mw-lit";
-var selectors = "";
-var language = "en";
-var subscriptionKey = "";
+var translatedMark = 'mw-translated';
+var highlightMark = 'mw-lit';
+var selectors = '';
+var language = 'en';
+var subscriptionKey = '';
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
    switch (request.task) {
-      case "mw-init":
+      case 'mw-init':
          loadOptions();
          break;
 
-      case "translate page":
-         if (subscriptionKey == "") return;
+      case 'translate page':
+         if (subscriptionKey == '') return;
          if (individualMode) deactivateIndividualMode();
          language = request.languageCode;
          iterateTexts(document);
-         sendResponse({ fromcontent: "Content recieved language code." });
+         sendResponse({ fromcontent: 'Content recieved language code.' });
          break;
 
-      case "activate individual":
-         if (subscriptionKey == "") return;
+      case 'activate individual':
+         if (subscriptionKey == '') return;
          individualMode = true;
          language = request.languageCode;
          activateIndividualMode();
          break;
 
-      case "deactivate individual":
+      case 'deactivate individual':
          deactivateIndividualMode();
          sendResponse();
          break;
@@ -36,29 +36,28 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 });
 
 function loadOptions() {
-   subscriptionKey = chrome.storage.sync.get(['azurekey'], function (result) {
-      console.log('Value currently is ' + result.key);
-   });
    chrome.storage.sync.get({
       translateHeadings: true,
       translateParagraphs: true,
-      translateOthers: true
+      translateOthers: true,
+      azurekey: ''
    }, function (items) {
       resetSelectors(items);
+      subscriptionKey = items.azurekey;
    });
 }
 
 function resetSelectors(options) {
-   selectors = "";
+   selectors = '';
    if (options.translateHeadings) {
       selectors += `h1:not(${translatedMark}), h2:not(${translatedMark}), h3:not(${translatedMark}), h4:not(${translatedMark}), h5:not(${translatedMark}), h6:not(${translatedMark})`;
    }
    if (options.translateParagraphs) {
-      if (selectors !== "") selectors += ", ";
+      if (selectors !== '') selectors += ', ';
       selectors += `p:not(.${translatedMark})`;
    }
    if (options.translateOthers) {
-      if (selectors !== "") selectors += ", ";
+      if (selectors !== '') selectors += ', ';
       selectors += `span:not(${translatedMark}), label:not(${translatedMark})`;
    }
 }
@@ -73,10 +72,9 @@ function iterateTexts(root) {
 
 function requestTranslation(textElement, languageCode) {
    var text = textElement.textContent;
-   console.log(`${languageCode} text: ${text}`);
 
-   var endpoint = "https://api.cognitive.microsofttranslator.com";
-   var location = "global";
+   var endpoint = 'https://api.cognitive.microsofttranslator.com';
+   var location = 'global';
 
    axios({
       baseURL: endpoint,
@@ -104,12 +102,12 @@ function requestTranslation(textElement, languageCode) {
 function insertTranslation(referenceNode, translatedText) {
    var translated = referenceNode.cloneNode(true);
    translated.innerHTML = translatedText.italics();
-   translated.style.color = "gray";
+   translated.style.color = 'gray';
    translated.classList.add(translatedMark); // mark as translated
-   translated.classList.remove("mw-lit");
+   translated.classList.remove(highlightMark);
 
    referenceNode.classList.add(translatedMark); // mark as translated
-   referenceNode.style.marginBottom = "0";
+   referenceNode.style.marginBottom = '0';
    referenceNode.parentNode.insertBefore(translated, referenceNode.nextSibling);
 }
 
@@ -118,16 +116,16 @@ var individualMode = false;
 
 function activateIndividualMode() {
    clearPrev();
-   document.addEventListener("mouseover", highlighter);
-   document.addEventListener("mouseout", unhighlighter);
-   document.addEventListener("click", translateSelected);
+   document.addEventListener('mouseover', highlighter);
+   document.addEventListener('mouseout', unhighlighter);
+   document.addEventListener('click', translateSelected);
 }
 
 function deactivateIndividualMode() {
    clearPrev();
-   document.removeEventListener("mouseover", highlighter);
-   document.removeEventListener("mouseout", unhighlighter);
-   document.removeEventListener("click", translateSelected);
+   document.removeEventListener('mouseover', highlighter);
+   document.removeEventListener('mouseout', unhighlighter);
+   document.removeEventListener('click', translateSelected);
 }
 
 var prev;
